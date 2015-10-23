@@ -48,7 +48,7 @@ namespace WeatherApp.Controllers
                 WeatherViewModel weatherViewModel = _weatherInfoService.WeatherInfo(addressViewModel);
 
                 if (weatherViewModel != null)
-                    return View("_SearchResults", weatherViewModel);
+                    return View("SearchResults", weatherViewModel);
             }
 
             this.ModelState.AddModelError("", "No weather information could be provided for the given address.  Please try another address.");
@@ -64,6 +64,21 @@ namespace WeatherApp.Controllers
             Highcharts chart = _weatherInfoService.WeatherChart(weatherViewModel.PreviousWeekWeather);
 
             return PartialView(chart);
+        }
+
+        public ActionResult ChartTest()
+        {
+            Highcharts chart = new Highcharts("chart")
+                .SetXAxis(new XAxis
+                {
+                    Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
+                })
+                .SetSeries(new Series
+                {
+                    Data = new Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4 })
+                });
+
+            return View(chart);
         }
 
         #endregion
