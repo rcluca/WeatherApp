@@ -35,6 +35,8 @@ namespace WeatherApp
                       "~/Content/site.css",
                       "~/Content/weather-icons.css",
                       "~/Content/weather-icons-wind.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
