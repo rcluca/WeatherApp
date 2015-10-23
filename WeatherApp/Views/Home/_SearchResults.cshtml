@@ -1,0 +1,54 @@
+﻿@model WeatherApp.Models.ViewModels.WeatherViewModel
+@using ForecastIO.Extensions;
+@using System.Globalization;
+@{ 
+    int hourOffset = Model.CurrentWeather.currently.time.ToDateTime().Hour - 7;
+}
+
+<div id="weatherSearchResults">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <div id="currentWeather">
+                <h3>
+                    @Model.AddressInfo.FormattedAddress.
+                </h3>
+                <h3>
+                    @Model.CurrentWeather.currently.summary <i class="wi wi-forecast-io-@Model.CurrentWeather.currently.icon"></i>
+                </h3>
+                <h1>
+                    @Convert.ToInt32(Model.CurrentWeather.currently.temperature) <i class="wi wi-fahrenheit"></i>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <h2>Hourly Forecast</h2>
+            <div id="forecastWeather">
+                <div class="row">
+                    @for (int i = hourOffset; i < 24 && i < 12 + hourOffset; i++)
+                    {
+                        <div class="col-sm-1">
+                            <p>
+                                @Model.CurrentWeather.hourly.data[i].time.ToDateTime().ToString("t")
+                            </p>
+                            <p>
+                                @Convert.ToInt32(Model.CurrentWeather.hourly.data[i].temperature) <i class="wi wi-forecast-io-@Model.CurrentWeather.hourly.data[i].icon"></i>
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <h2>Previous Week's Temperature</h2>
+            <div id="pastWeather">
+                @{Html.RenderAction("_PreviousWeatherChart", new { weatherViewModel = Model });}
+            </div>
+        </div>
+    </div>
+</div>

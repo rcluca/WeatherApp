@@ -1,0 +1,33 @@
+﻿@model WeatherApp.Models.ViewModels.AddressViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<ol style='visibility:hidden;'></ol>
+
+<div id="weatherSearch">
+    <div class="row">
+        <form id="weatherSearchForm" data-controller="Home" data-action="Index" method="post" role="form">
+            @Html.AntiForgeryToken()
+
+            <div class="form-inline text-center">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control input-lg", @placeholder = "Enter an address" } })
+                </div>
+                <input id="weatherSearchSubmit" type="submit" value="Search" class="btn btn-primary input-lg" />
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div id="previousSearch" class="text-center">
+            <h3 id="previousSearchHeader"></h3>
+            <div id="previousSearchList">
+
+            </div>
+        </div>
+    </div>
+</div>
