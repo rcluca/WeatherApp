@@ -24,7 +24,7 @@ namespace WeatherApp
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                      "~/Scripts/highcharts-4.0.1/js/highcharts.js"));
+                      "~/Scripts/highcharts-4.0.1/js/highcharts-all.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/Custom/*.js",
