@@ -1,9 +1,6 @@
 ﻿@model WeatherApp.Models.ViewModels.WeatherViewModel
 @using ForecastIO.Extensions;
 @using System.Globalization;
-@{
-    int hourOffset = Model.CurrentWeather.currently.time.ToDateTime().Hour - 7;
-}
 
 <div id="weatherSearchResults">
     <div class="row">
@@ -21,16 +18,27 @@
             <h2>Hourly Forecast</h2>
             <div id="forecastWeather">
                 <div class="row">
-                    @for (int i = hourOffset; i < 24 && i < 12 + hourOffset; i++)
-                    {
-                        <div class="col-sm-1">
-                            <p>
-                                @Model.CurrentWeather.hourly.data[i].time.ToDateTime().ToString("t")
-                            </p>
-                            <p>
-                                @Convert.ToInt32(Model.CurrentWeather.hourly.data[i].temperature) <i class="wi wi-forecast-io-@Model.CurrentWeather.hourly.data[i].icon"></i>
-                            </p>
-                        </div>
+                    @{
+                        int count = 0;
+                        int i = 0;
+                        DateTime curDateTime = DateTime.Now;
+                        while (i < 24 && count < 12)
+                        {
+                            DateTime dateTime = Model.CurrentWeather.hourly.data[i].time.ToDateTime();
+                            if (dateTime > curDateTime)
+                            {
+                                count++;
+                                <div class="col-sm-1">
+                                    <p>
+                                        @dateTime.ToString("t")
+                                    </p>
+                                    <p>
+                                        @Convert.ToInt32(Model.CurrentWeather.hourly.data[i].temperature) <i class="wi wi-forecast-io-@Model.CurrentWeather.hourly.data[i].icon"></i>
+                                    </p>
+                                </div>
+                            }
+                            i++;
+                        }
                     }
                 </div>
             </div>
