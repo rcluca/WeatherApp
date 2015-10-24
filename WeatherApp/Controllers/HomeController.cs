@@ -45,7 +45,7 @@ namespace WeatherApp.Controllers
         {
             if (addressViewModel.Address != null)
             {
-                WeatherViewModel weatherViewModel = _weatherInfoService.WeatherInfo(addressViewModel);
+                WeatherViewModel weatherViewModel = _weatherInfoService.WeatherInfo(addressViewModel, true);
 
                 if (weatherViewModel != null)
                     return View("SearchResults", weatherViewModel);

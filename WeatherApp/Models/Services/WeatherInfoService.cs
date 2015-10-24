@@ -41,11 +41,11 @@ namespace WeatherApp.Models.Services
             return _instance;
         }
 
-        public WeatherViewModel WeatherInfo(AddressViewModel addressViewModel)
+        public WeatherViewModel WeatherInfo(AddressViewModel addressViewModel, bool extendHourly)
         {
             WeatherViewModel weatherViewModel = null;
 
-            ForecastIOResponse currentWeather = GetWeatherInfo(addressViewModel.Address);
+            ForecastIOResponse currentWeather = GetWeatherInfo(addressViewModel.Address, extendHourly);
 
             if (currentWeather != null)
             {
@@ -112,9 +112,32 @@ namespace WeatherApp.Models.Services
             return chart;
         }
 
-        private ForecastIOResponse GetWeatherInfo(string address)
+        private ForecastIOResponse GetWeatherInfo(string address, bool extendHourly)
         {
-            return GetWeatherInfo(address, DateTime.Now);
+            // Get Latitude and Longitude for given address
+            Address addressInfo = GetGeoInfo(address);
+            ForecastIOResponse response = null;
+
+            // If the address was found (had Latitude and Longitude)
+            if (addressInfo != null)
+            {
+                ForecastIORequest request;
+                if (extendHourly)
+                {
+                    Extend[] extendBlocks = new Extend[]
+                    { Extend.hourly };
+                    request = new ForecastIORequest(_weatherApiKey, Convert.ToSingle(addressInfo.Coordinates.Latitude), Convert.ToSingle(addressInfo.Coordinates.Longitude), Unit.us, extendBlocks);
+                    response = request.Get();
+                }
+                else
+                {
+                    // Get weather info from forecast API
+                    request = new ForecastIORequest(_weatherApiKey, Convert.ToSingle(addressInfo.Coordinates.Latitude), Convert.ToSingle(addressInfo.Coordinates.Longitude), Unit.us);
+                    response = request.Get();
+                }
+            }
+
+            return response;
         }
 
         private ForecastIOResponse GetWeatherInfo(string address, DateTime dateTime)

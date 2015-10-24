@@ -21,8 +21,8 @@
                     @{
                         int count = 0;
                         int i = 0;
-                        DateTime curDateTime = DateTime.Now;
-                        while (i < 24 && count < 12)
+                        DateTime curDateTime = Model.CurrentWeather.currently.time.ToDateTime().AddHours(Model.CurrentWeather.offset);
+                        while (i < 48 && count < 12)
                         {
                             DateTime dateTime = Model.CurrentWeather.hourly.data[i].time.ToDateTime();
                             if (dateTime > curDateTime)

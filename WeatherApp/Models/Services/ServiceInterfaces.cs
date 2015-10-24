@@ -11,7 +11,7 @@ namespace WeatherApp.Models.Services
 {
     public interface IWeatherInfoService
     {
-        WeatherViewModel WeatherInfo(AddressViewModel addressViewModel);
+        WeatherViewModel WeatherInfo(AddressViewModel addressViewModel, bool extendHourly);
         Highcharts WeatherChart(List<ForecastIOResponse> previousWeekWeather);
     }
 }
