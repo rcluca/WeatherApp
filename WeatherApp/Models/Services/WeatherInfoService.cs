@@ -20,7 +20,7 @@ namespace WeatherApp.Models.Services
 {
     public class WeatherInfoService : IWeatherInfoService
     {
-        private static WeatherInfoService _instance = null;
+        private static WeatherInfoService _instance = null; 
         private Dictionary<string, Address> _geoCodes = new Dictionary<string, Address>();
 
         // Get api keys from secured Web.config file
