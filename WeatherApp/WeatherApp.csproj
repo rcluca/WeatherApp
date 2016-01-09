@@ -202,13 +202,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\web-storage.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.config" />
     <None Include="Web.config.template" />
     <None Include="Web.config.Debug.template">
       <DependentUpon>Web.config.template</DependentUpon>
