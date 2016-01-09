@@ -213,3 +213,5 @@ ModelManifest.xml
 
 # Protect sensitive information in a local web.config
 WeatherApp/Web.config
+WeatherApp/Web.Debug.config
+WeatherApp/Web.Release.config
