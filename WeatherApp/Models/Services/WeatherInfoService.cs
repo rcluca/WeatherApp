@@ -14,6 +14,7 @@ using DotNet.Highcharts;
 using DotNet.Highcharts.Options;
 using DotNet.Highcharts.Helpers;
 using ForecastIO.Extensions;
+using System.Web.Configuration;
 
 namespace WeatherApp.Models.Services
 {
@@ -22,10 +23,9 @@ namespace WeatherApp.Models.Services
         private static WeatherInfoService _instance = null;
         private Dictionary<string, Address> _geoCodes = new Dictionary<string, Address>();
 
-        // IMPORTANT!!!!
-        // These API keys need to be moved out of source code and encrypted for production use
-        private const string _weatherApiKey = "d7bd2e818f6ece47496f4a2457f967af";
-        private const string _googleApiKey = "AIzaSyDDxy1pl8ulBEyfBId8Iv1VMBqd3u1NijM";
+        // Get api keys from secured Web.config file
+        private string _weatherApiKey = WebConfigurationManager.AppSettings["WeatherApiKey"];
+        private string _googleApiKey = WebConfigurationManager.AppSettings["GoogleApiKey"];
 
         // Singleton pattern used to allow for cached results through common _geoCode dictionary
         // WeatherInfo is not cached because it changes based on time

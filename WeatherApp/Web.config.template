@@ -14,9 +14,9 @@
     <add key="ClientValidationEnabled" value="true" />
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
     <!-- Add value from local -->
-    <add key="WeatherApiKey" value="d7bd2e818f6ece47496f4a2457f967af"/>
+    <add key="WeatherApiKey" value="#ADD VALUE FROM LOCAL#"/>
     <!-- Add value from local -->
-    <add key="GoogleApiKey" value="AIzaSyDDxy1pl8ulBEyfBId8Iv1VMBqd3u1NijM"/>
+    <add key="GoogleApiKey" value="#ADD VALUE FROM LOCAL#"/>
   </appSettings>
   <system.web>
     <compilation debug="true" targetFramework="4.5.2" />
